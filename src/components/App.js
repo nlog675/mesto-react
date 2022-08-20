@@ -15,16 +15,22 @@ function App() {
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
     function handleEditAvatarClick() {
-        setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen)
+        setIsEditAvatarPopupOpen(true)
     };
 
     function handleEditProfileClick() {
-        setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
+        setIsEditProfilePopupOpen(true)
     };
 
     function handleAddPlaceClick() {
-        setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
+        setIsAddPlacePopupOpen(true)
     }; 
+
+    function closeAllPopups() {
+        setIsEditAvatarPopupOpen(false)
+        setIsEditProfilePopupOpen(false)
+        setIsAddPlacePopupOpen(false)
+    }
 
   return (
     <div className="page">
@@ -41,14 +47,17 @@ function App() {
 
       <EditProfilePopup 
         isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
       />
 
       <AddPlacePopup 
         isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
       />
       
       <EditAvatarPopup 
         isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
       />
 
       <ImagePopup />
