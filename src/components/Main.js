@@ -1,5 +1,6 @@
 import React from 'react';
 import { api } from '../utils/api';
+import Card from './Card';
 
 function Main(props) {
     const [userName, setUserName] = React.useState();
@@ -37,17 +38,10 @@ function Main(props) {
                 <ul className="elements__list">
                     {cards.map((data) => {
                         return(
-                            <li key={data._id} className="elements__item">
-                                <button type="button" className="elements__card-delete"></button>
-                                <div style={{ backgroundImage: `url(${data.link})` }} className="elements__item-image" />
-                                <div className="elements__card-info">
-                                    <h2 className="elements__card-heading">{data.name}</h2>
-                                    <div>
-                                        <button type="button" className="elements__card-like"></button>
-                                        <div className="elements__card-like-counter">{data.likes.length}</div>
-                                    </div>
-                                </div>
-                            </li>
+                            <Card 
+                            key={data._id}
+                            card={data}
+                            />
                         )
                     })}
                 </ul>
