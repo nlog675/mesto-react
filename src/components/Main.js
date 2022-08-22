@@ -14,10 +14,10 @@ function Main(props) {
                 setUserName(user.name);
                 setUserDescription(user.about);
                 setUserAvatar(user.avatar);
-                setCards(data)
+                setCards(data);
             })
             .catch((err) => console.log(err))
-    })
+    });
 
     return(
         <main className="content">
@@ -41,6 +41,7 @@ function Main(props) {
                             <Card 
                             key={data._id}
                             card={data}
+                            onClick={props.onCardClick}
                             />
                         )
                     })}

@@ -2,8 +2,8 @@ import React from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
-import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
 import EditAvatarPopup from './EditAvatarPopup';
@@ -13,6 +13,7 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+    const [selectedCard, setSelectedCard] = React.useState(false);
 
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true)
@@ -26,11 +27,16 @@ function App() {
         setIsAddPlacePopupOpen(true)
     }; 
 
+    function handleCardClick(card) {
+        setSelectedCard(card)
+    };
+
     function closeAllPopups() {
-        setIsEditAvatarPopupOpen(false)
-        setIsEditProfilePopupOpen(false)
-        setIsAddPlacePopupOpen(false)
-    }
+        setIsEditAvatarPopupOpen(false);
+        setIsEditProfilePopupOpen(false);
+        setIsAddPlacePopupOpen(false);
+        setSelectedCard(false);
+    };
 
   return (
     <div className="page">
@@ -41,6 +47,7 @@ function App() {
         onEditAvatar = {handleEditAvatarClick}
         onEditProfile = {handleEditProfileClick}
         onAddPlace = {handleAddPlaceClick}
+        onCardClick = {handleCardClick}
       />
 
       <Footer />
@@ -60,9 +67,10 @@ function App() {
         onClose={closeAllPopups}
       />
 
-      <ImagePopup />
-
-      
+      <ImagePopup 
+        card={selectedCard}
+        onClose={closeAllPopups}
+      />
 
       <div className="popup popup-delete">
           <div className="popup__content-delete">
@@ -77,20 +85,6 @@ function App() {
               </form>
           </div>
       </div>
-
-      <template id="card" className="template-item">
-          <li className="elements__item">
-              <button type="button" className="elements__card-delete"></button>
-              <img className="elements__item-image" />
-              <div className="elements__card-info">
-                  <h2 className="elements__card-heading"></h2>
-                  <div>
-                      <button type="button" className="elements__card-like"></button>
-                      <div className="elements__card-like-counter"></div>
-                  </div>
-              </div>
-          </li>
-      </template>
     </div>
   );
 }
