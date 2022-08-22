@@ -1,14 +1,14 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { api } from '../utils/api';
 import Card from './Card';
 
-function Main(props) {
-    const [userName, setUserName] = React.useState();
-    const [userDescription, setUserDescription] = React.useState();
-    const [userAvatar, setUserAvatar] = React.useState();
-    const [cards, setCards] = React.useState([]);
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
+    const [userName, setUserName] = useState('');
+    const [userDescription, setUserDescription] = useState('');
+    const [userAvatar, setUserAvatar] = useState('');
+    const [cards, setCards] = useState([]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         Promise.all([api.getProfile(), api.getCard()])
             .then(([user, data]) => {
                 setUserName(user.name);
@@ -22,16 +22,16 @@ function Main(props) {
     return(
         <main className="content">
             <section className="profile">
-                <button onClick={props.onEditAvatar} className="profile__button-change-avatar"></button>
+                <button onClick={onEditAvatar} className="profile__button-change-avatar"></button>
                 <div style={{ backgroundImage: `url(${userAvatar})` }} className="profile__avatar" />
                 <div className="profile__info">
                     <div className="profile__container">
                         <h1 className="profile__name">{userName}</h1>
-                        <button onClick={props.onEditProfile} type="button" className="profile__edit-button"></button>
+                        <button onClick={onEditProfile} type="button" className="profile__edit-button"></button>
                     </div>
                     <h2 className="profile__description">{userDescription}</h2>
                 </div>
-                <button onClick={props.onAddPlace} type="button" className="profile__add-button"></button>
+                <button onClick={onAddPlace} type="button" className="profile__add-button"></button>
             </section>
             
             <section className="elements">
@@ -41,7 +41,7 @@ function Main(props) {
                             <Card 
                             key={data._id}
                             card={data}
-                            onClick={props.onCardClick}
+                            onClick={onCardClick}
                             />
                         )
                     })}
