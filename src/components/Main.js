@@ -1,19 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { api } from '../utils/api';
 import Card from './Card';
+import { CurrentUserContext } from './contexts/CurrentUserContext';
 
 function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
-    const [userName, setUserName] = useState('');
-    const [userDescription, setUserDescription] = useState('');
-    const [userAvatar, setUserAvatar] = useState('');
     const [cards, setCards] = useState([]);
+    const currentUser = useContext(CurrentUserContext);
 
     useEffect(() => {
-        Promise.all([api.getProfile(), api.getCard()])
-            .then(([user, data]) => {
-                setUserName(user.name);
-                setUserDescription(user.about);
-                setUserAvatar(user.avatar);
+        Promise.all([api.getCard()])
+            .then(([data]) => {
                 setCards(data);
             })
             .catch((err) => console.log(err))
@@ -23,13 +19,13 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
         <main className="content">
             <section className="profile">
                 <button onClick={onEditAvatar} className="profile__button-change-avatar"></button>
-                <div style={{ backgroundImage: `url(${userAvatar})` }} className="profile__avatar" />
+                <div style={{ backgroundImage: `url(${currentUser.avatar})` }} className="profile__avatar" />
                 <div className="profile__info">
                     <div className="profile__container">
-                        <h1 className="profile__name">{userName}</h1>
+                        <h1 className="profile__name">{currentUser.name}</h1>
                         <button onClick={onEditProfile} type="button" className="profile__edit-button"></button>
                     </div>
-                    <h2 className="profile__description">{userDescription}</h2>
+                    <h2 className="profile__description">{currentUser.about}</h2>
                 </div>
                 <button onClick={onAddPlace} type="button" className="profile__add-button"></button>
             </section>
