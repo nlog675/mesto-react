@@ -1,5 +1,5 @@
-.elements__card-delete {
-    background-image: url(../../../images/Trash.svg);
+.elements__card-delete_visible {
+    background-image: url(../../../../images/Trash.svg);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;

@@ -3,7 +3,7 @@ import { api } from '../utils/api';
 import Card from './Card';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, cards}) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onCardDelete, cards}) {
     // const [cards, setCards] = useState([]);
     const currentUser = useContext(CurrentUserContext);
 
@@ -47,6 +47,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike,
                             card={data}
                             onClick={onCardClick}
                             onCardLike={onCardLike}
+                            onCardDelete={onCardDelete}
                             />
                         )
                     })}
