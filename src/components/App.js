@@ -17,15 +17,34 @@ function App() {
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
     const [currentUser, setCurrentUser] = useState({});
+    const [cards, setCards] = useState([]);
 
     useEffect(() => {
       Promise.all([api.getProfile(), api.getCard()])
           .then(([user, data]) => {
               setCurrentUser(user)
-              // setCards(data);
+              setCards(data);
           })
           .catch((err) => console.log(err))
   }, []);
+
+    function handleCardLike(card) {
+      const isLiked = card.likes.some(i => i._id === currentUser._id);
+      
+      if (!isLiked) {
+        api.likeCard(card._id)
+          .then((res) => {
+            setCards((state) => state.map((c) => c._id === card._id ? res : c));
+          })
+          .catch((err) => console.log(err))
+      } else {
+        api.dislikeCard(card._id)
+          .then((res) => {
+            setCards((state) => state.map((c) => c._id === card._id ? res : c));
+          })
+          .catch((err) => console.log(err))
+      }
+    }
 
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true)
@@ -57,10 +76,12 @@ function App() {
         <Header />
 
         <Main 
-          onEditAvatar = {handleEditAvatarClick}
-          onEditProfile = {handleEditProfileClick}
-          onAddPlace = {handleAddPlaceClick}
-          onCardClick = {handleCardClick}
+          onEditAvatar={handleEditAvatarClick}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onCardClick={handleCardClick}
+          cards={cards}
+          onCardLike={handleCardLike}
         />
 
         <Footer />

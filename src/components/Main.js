@@ -3,17 +3,25 @@ import { api } from '../utils/api';
 import Card from './Card';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
-    const [cards, setCards] = useState([]);
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, cards}) {
+    // const [cards, setCards] = useState([]);
     const currentUser = useContext(CurrentUserContext);
 
-    useEffect(() => {
-        Promise.all([api.getCard()])
-            .then(([data]) => {
-                setCards(data);
-            })
-            .catch((err) => console.log(err))
-    }, []);
+    // function handleCardLike(card) {
+    //     const isLiked = card.likes.some(i => i._id === currentUser._id);
+        
+    //     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+    //         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    //     });
+    // }
+
+    // useEffect(() => {
+    //     Promise.all([api.getCard()])
+    //         .then(([data]) => {
+    //             setCards(data);
+    //         })
+    //         .catch((err) => console.log(err))
+    // }, []);
 
     return(
         <main className="content">
@@ -38,6 +46,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
                             key={data._id}
                             card={data}
                             onClick={onCardClick}
+                            onCardLike={onCardLike}
                             />
                         )
                     })}
