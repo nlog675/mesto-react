@@ -26,12 +26,24 @@ function Card({card, onClick, onCardLike, onCardDelete}) {
 
   return(
     <li className="elements__item">
-      <button onClick={handleDeleteClick} type="button" className={cardDeleteButtonClassName}></button>
-      <div onClick={handleClick} style={{ backgroundImage: `url(${card.link})` }} className="elements__item-image" />
+      <button 
+        onClick={handleDeleteClick} 
+        type="button" 
+        className={cardDeleteButtonClassName}
+        />
+      <div 
+        onClick={handleClick} 
+        style={{ backgroundImage: `url(${card.link})` }} 
+        className="elements__item-image" 
+      />
       <div className="elements__card-info">
         <h2 className="elements__card-heading">{card.name}</h2>
         <div>
-          <button onClick={handleLikeClick} type="button" className={cardLikeButtonClassName}></button>
+          <button 
+            onClick={handleLikeClick} 
+            type="button" 
+            className={cardLikeButtonClassName}
+            />
           <div className="elements__card-like-counter">{card.likes.length}</div>
         </div>
       </div>

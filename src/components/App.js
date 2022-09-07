@@ -88,6 +88,14 @@ function App() {
         .catch((err) => console.log(err))
     }
 
+    function handleAddPlaceSubmit(data) {
+      api.addCard(data)
+        .then((newCard) => {
+          setCards([newCard, ...cards]);
+          closeAllPopups()
+        })
+    }
+
     function closeAllPopups() {
         setIsEditAvatarPopupOpen(false);
         setIsEditProfilePopupOpen(false);
@@ -122,6 +130,7 @@ function App() {
         <AddPlacePopup 
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit}
         />
         
         <EditAvatarPopup 
