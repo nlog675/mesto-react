@@ -40,14 +40,48 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
       buttonDefaultText={"Сохранить"}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="" className="popup__form-label">
-                      <input value={name} onChange={handleNameChange} id="name" name="name" type="text" className="popup__input popup__input-name" placeholder="Имя" minLength="2" maxLength="40" required />
-                      <span id="error-name" className="popup__error name-error"></span>
-                  </label>
-                  <label htmlFor="" className="popup__form-label">
-                      <input value={description} onChange={handleDescriptionChange} id="bio" name="about" type="text" className="popup__input popup__input-about" placeholder="О себе" minLength="2" maxLength="200" required />
-                      <span id="error-bio" className="popup__error bio-error"></span>
-                  </label>
+      <label 
+        htmlFor="" 
+        className="popup__form-label"
+      >
+        <input 
+          value={name} 
+          onChange={handleNameChange} 
+          id="name" 
+          name="name" 
+          type="text" 
+          className="popup__input popup__input-name" 
+          placeholder="Имя" 
+          minLength="2" 
+          maxLength="40" 
+          required 
+        />
+        <span 
+          id="error-name" 
+          className="popup__error name-error"
+        />
+      </label>
+      <label 
+        htmlFor="" 
+        className="popup__form-label"
+      >
+        <input 
+          value={description} 
+          onChange={handleDescriptionChange} 
+          id="bio" 
+          name="about" 
+          type="text" 
+          className="popup__input popup__input-about" 
+          placeholder="О себе" 
+          minLength="2" 
+          maxLength="200" 
+          required 
+        />
+        <span 
+          id="error-bio" 
+          className="popup__error bio-error"
+        />
+      </label>
     </PopupWithForm>
   )
 }
