@@ -70,6 +70,16 @@ function App() {
         setSelectedCard(card)
     };
 
+    function handleUpdateUser(data) {
+      api.editProfile(data)
+        .then((res) => {
+          setCurrentUser(res);
+          closeAllPopups();
+        })
+        .catch((err) => console.log(err))
+  
+    }
+
     function closeAllPopups() {
         setIsEditAvatarPopupOpen(false);
         setIsEditProfilePopupOpen(false);
@@ -98,6 +108,7 @@ function App() {
         <EditProfilePopup 
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
         />
 
         <AddPlacePopup 
