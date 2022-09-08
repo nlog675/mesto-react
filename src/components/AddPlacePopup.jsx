@@ -6,9 +6,14 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
   const [cardLink, setCardLink] = useState('')
 
   useEffect(() => {
-    setCardName(cardName)
-    setCardLink(cardLink)
-  }, [])
+    if (isOpen) {
+      setCardName(cardName)
+      setCardLink(cardLink)
+    } else {
+      setCardName('')
+      setCardLink('')
+    }
+  }, [isOpen])
   
   function handleSubmit(e) {
     e.preventDefault();
