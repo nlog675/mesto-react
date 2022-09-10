@@ -19,11 +19,6 @@ function PopupWithForm({name, title, children, buttonDefaultText, isOpen, onClos
                 noValidate
                 >
                   {children}
-                  <button 
-                    type="submit" 
-                    className="popup__button"
-                    >{`${buttonDefaultText}`}
-                    </button>
               </form>
           </div>
       </div>

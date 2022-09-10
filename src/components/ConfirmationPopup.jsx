@@ -1,7 +1,7 @@
 import PopupWithForm from "./PopupWithForm"
 
 
-function ConfirmationPopup({onClose, onConfirm, card}) {
+function ConfirmationPopup({onClose, onConfirm, card, onLoad}) {
   
   function handleSubmit(e) {
     e.preventDefault();
@@ -15,9 +15,14 @@ function ConfirmationPopup({onClose, onConfirm, card}) {
       title={"Вы уверены?"}
       isOpen={card}
       onClose={onClose} 
-      buttonDefaultText={"Да"}
       onSubmit={handleSubmit}
-      />
+      >
+        <button 
+          type="submit" 
+          className="popup__button">
+            { onLoad ? "Удаление..." : "Да"}
+          </button>
+      </PopupWithForm>
     )
 }
 

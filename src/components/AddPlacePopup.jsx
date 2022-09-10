@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "../hooks/useForm";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({isOpen, onClose, onAddPlace}) {
+function AddPlacePopup({isOpen, onClose, onAddPlace, onLoad}) {
   const inputValues = {name: '', link: ''};
   const {values, setValues, handleChange} = useForm(inputValues);
 
@@ -10,7 +10,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
     if (isOpen) {
       setValues(inputValues);
     }
-  }, [isOpen, inputValues, setValues]);
+  }, [isOpen]);
   
   function handleSubmit(e) {
     e.preventDefault();
@@ -27,7 +27,6 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
       title={"Новое место"} 
       isOpen={isOpen} 
       onClose={onClose} 
-      buttonDefaultText={"Создать"}
       onSubmit={handleSubmit}
     >
       <label 
@@ -70,6 +69,11 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
           className="popup__error place-link-error"
           />
       </label>
+      <button 
+        type="submit" 
+        className="popup__button">
+          { onLoad ? "Создание..." : "Создать" }
+        </button>
     </PopupWithForm>
   )
 }

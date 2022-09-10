@@ -3,7 +3,7 @@ import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { useForm } from "../hooks/useForm";
 
-function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
+function EditProfilePopup({isOpen, onClose, onUpdateUser, onLoad}) {
   const currentUser = useContext(CurrentUserContext);
   const {values, setValues, handleChange} = useForm(currentUser);
 
@@ -28,7 +28,6 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
       title={"Редактировать профиль"} 
       isOpen={isOpen} 
       onClose={onClose} 
-      buttonDefaultText={"Сохранить"}
       onSubmit={handleSubmit}
     >
       <label 
@@ -73,6 +72,11 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
           className="popup__error bio-error"
         />
       </label>
+      <button 
+        type="submit" 
+        className="popup__button">
+          { onLoad ? "Сохранение..." : "Сохранить" }
+        </button>
     </PopupWithForm>
   )
 }
