@@ -6,8 +6,8 @@ function ConfirmationPopup({onClose, onConfirm, card}) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    onConfirm(card)
-  }
+    onConfirm(card);
+  };
 
     return(
       <PopupWithForm
